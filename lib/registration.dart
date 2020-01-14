@@ -172,6 +172,8 @@ class _rgstrState extends State<rgstr> {
                     onPressed: () async
                     {
 
+
+
                       if(email==null||password==null)
                         {
                           print('xxx');
