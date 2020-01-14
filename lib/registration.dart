@@ -25,7 +25,7 @@ class _rgstrState extends State<rgstr> {
     return new Scaffold(
 
 
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffE3E3E3),
       body: new ModalProgressHUD(
         inAsyncCall: showSpinner,
 

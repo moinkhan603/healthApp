@@ -49,7 +49,7 @@ class _splashState extends State<splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffffffff),
+        backgroundColor: Color(0xffE3E3E3),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +59,7 @@ class _splashState extends State<splash> {
               ),
               Center(
                 child: Image.asset(
-                  'assets/images/logos.jpg',
+                  'assets/images/mylogo.jpg',
                   height: 350,
                   width: 320,
                 ),

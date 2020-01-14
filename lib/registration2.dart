@@ -23,7 +23,7 @@ class _signupState extends State<signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: Color(0xffE3E3E3),
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: SingleChildScrollView(
@@ -33,7 +33,7 @@ class _signupState extends State<signup> {
             //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(height: 45,),
-              Image.asset('assets/images/logos.jpg'),
+              Image.asset('assets/images/mylogo.jpg'),
 Text("SIGN UP HERE",style: TextStyle(fontSize: 42,fontWeight:FontWeight.bold,
 fontFamily: 'DancingScript',color: Colors.blueAccent
 ),),
