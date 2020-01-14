@@ -4,6 +4,7 @@ import 'myfnts_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
 import 'package:flutter/services.dart';
 //import 'package:geolocator/geolocator.dart';
 
@@ -17,9 +18,11 @@ class wlcm extends StatefulWidget {
   _wlcmState createState() => _wlcmState();
 }
 String mydate='';
-String height='';
-String weight='';
+String height;
+String weight;
 String gender='';
+String height_f;
+String weight_f;
 String location='mororco';
 
 
@@ -89,9 +92,9 @@ class _wlcmState extends State<wlcm> {
       "userid":"111",
       "dob":mydate,
       "hight_value":height,
-      "hight_format":"111",
+      "hight_format":height_f,
       "weight_value":weight,
-      "weight_format":"111",
+      "weight_format":weight_f,
       "gender":gender,
       "location":location
 
@@ -99,13 +102,17 @@ class _wlcmState extends State<wlcm> {
 
     };
 
-    http.Response response = await http.post(
-      uri,
-      body: json.encode(requestBody),
-    );
 
-    print(response.body);
-    _showDialog();
+
+         http.Response response = await http.post(
+           uri,
+           body: json.encode(requestBody),
+         );
+
+         print(response.body);
+         _showDialog();
+
+
   }
 
 
@@ -120,7 +127,7 @@ class _wlcmState extends State<wlcm> {
     return Scaffold(
         appBar: AppBar(centerTitle: true,
 
-          backgroundColor: Colors.black54,
+          backgroundColor: Colors.lightBlue,
 
           title: Text('WELCOME',),
           elevation: 15,
@@ -138,7 +145,7 @@ class _wlcmState extends State<wlcm> {
           ],
 
         ),
-        backgroundColor: Color(0xffFFFFE0),
+        backgroundColor: Color(0xffffffff),
         //  padding: EdgeInsets.symmetric(horizontal: 20),
 
         body: SingleChildScrollView(
@@ -189,7 +196,7 @@ class _wlcmState extends State<wlcm> {
                               style: TextStyle(fontSize: 20),
                             ),
 
-                            IconButton(icon: Icon(Icons.date_range,size: 40,color: Colors.red,), onPressed: () {
+                            IconButton(icon: Icon(Icons.date_range,size: 40,color: Colors.blue,), onPressed: () {
 
                               selectdate(context);
 
@@ -204,7 +211,7 @@ class _wlcmState extends State<wlcm> {
                           children: <Widget>[
 
                             Text('Height',style: TextStyle(fontSize: 22),),
-                            SizedBox(width: 200,),
+                            SizedBox(width: 150,),
                             Expanded(
                               child: Material(
 
@@ -229,6 +236,30 @@ class _wlcmState extends State<wlcm> {
                               ),
 
                             ),
+                            Expanded(
+                              child: Material(
+
+                                elevation: 8.0,
+                                color: Colors.white70,
+                                // borderRadius: BorderRadius.all(Radius.circular(30)),
+                                child: new TextField(
+                                 onChanged: (String value)
+                                  {
+                                    height_f=value;
+                                  },
+                                  textAlign: TextAlign.center,
+
+
+                                  decoration: InputDecoration(
+
+
+
+                                    hintText: "cm/in",),
+                                ),
+
+                              ),
+
+                            ),
 
 
 
@@ -243,7 +274,7 @@ class _wlcmState extends State<wlcm> {
                           children: <Widget>[
 
                             Text('Weight',style: TextStyle(fontSize: 22),),
-                            SizedBox(width: 200,),
+                            SizedBox(width: 148,),
                             Expanded(
                               child: Material(
 
@@ -263,6 +294,30 @@ class _wlcmState extends State<wlcm> {
 
 
                                     hintText: "50kg",),
+                                ),
+
+                              ),
+
+                            ),
+                            Expanded(
+                              child: Material(
+
+                                elevation: 8.0,
+                                color: Colors.white70,
+                                // borderRadius: BorderRadius.all(Radius.circular(30)),
+                                child: new TextField(
+                                  onChanged: (String value)
+                                  {
+                                    weight_f=value;
+                                  },
+                                  textAlign: TextAlign.center,
+
+
+                                  decoration: InputDecoration(
+
+
+
+                                    hintText: "kg/lb",),
                                 ),
 
                               ),
@@ -320,7 +375,7 @@ class _wlcmState extends State<wlcm> {
                           children: <Widget>[
 
                             Text('Location',style: TextStyle(fontSize: 20),),SizedBox(width: 10,),
-                            Switch(activeColor: Colors.red,
+                            Switch(activeColor: Colors.lightBlue,
                               onChanged: (val) => setState(()
                               {
                                 _isSwitched = val;
@@ -352,7 +407,7 @@ class _wlcmState extends State<wlcm> {
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(100)),
-                                  color: Color(0xffff3a5a)),
+                                  color: Colors.lightBlue),
                               child: FlatButton(
 
                                 child: Text(
@@ -364,8 +419,17 @@ class _wlcmState extends State<wlcm> {
                                 ),
                                 onPressed: ()
                                 {
-                                  postTest();
+                                  if(height==null||weight==null||weight_f==null||height_f==null)
+                                  {
+                                    Toast.show(
+                                        "feilds cannot be empty",
 
+                                        context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM,backgroundColor:Colors.red);
+
+                                  }
+                                  else {
+                                    postTest();
+                                  }
                                 },
                               ),
                             ))

@@ -3,7 +3,9 @@ import 'registration2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'welcome.dart';
+import 'package:toast/toast.dart';
 class rgstr extends StatefulWidget {
+  //final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   _rgstrState createState() => _rgstrState();
 }
@@ -20,9 +22,11 @@ class _rgstrState extends State<rgstr> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
+
+
       backgroundColor: Colors.white,
-      body: ModalProgressHUD(
+      body: new ModalProgressHUD(
         inAsyncCall: showSpinner,
 
         child: ListView(
@@ -37,7 +41,7 @@ class _rgstrState extends State<rgstr> {
                     height: 300,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Color(0x22ff3a5a), Color(0x22fe494d)])),
+                            colors: [Color(0x22ADD8E6), Color(0x22fe494d)])),
                   ),
                 ),
                 ClipPath(
@@ -48,7 +52,7 @@ class _rgstrState extends State<rgstr> {
                     height: 300,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Color(0x44ff3a5a), Color(0x44fe494d)])),
+                            colors: [Color(0xffADD8E6), Color(0xffADD8E6)])),
                   ),
                 ),
                 ClipPath(
@@ -97,10 +101,10 @@ class _rgstrState extends State<rgstr> {
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 child: TextField(
                   onChanged: (String value){
-                    email=value;
+                    email=value.trim();
 
                   },
-                  cursorColor: Colors.deepOrange,
+                  cursorColor: Colors.blue,
                   decoration: InputDecoration(
                       hintText: "Email",
                       prefixIcon: Material(
@@ -128,9 +132,9 @@ class _rgstrState extends State<rgstr> {
                 child: TextField(
                   obscureText: true,
                   onChanged: (String value){
-                    password=value;
+                    password=value.trim();
                   },
-                  cursorColor: Colors.deepOrange,
+                  cursorColor: Colors.blue,
                   decoration: InputDecoration(
                       hintText: "Password",
                       prefixIcon: Material(
@@ -155,7 +159,7 @@ class _rgstrState extends State<rgstr> {
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(100)),
-                      color: Color(0xffff3a5a)),
+                      color: Color(0xff1E90FF)),
                   child: FlatButton(
 
                     child: Text(
@@ -167,31 +171,40 @@ class _rgstrState extends State<rgstr> {
                     ),
                     onPressed: () async
                     {
-                      setState(() {
-                        showSpinner=true;
-                      });
-                      try {
-                        final newuser = await _auth.signInWithEmailAndPassword
-                          (email: email, password: password);
-                        if (newuser != null) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => wlcm()),
-                          );
+
+                      if(email==null||password==null)
+                        {
+                          print('xxx');
+                          Toast.show(
+                              "feilds cannot be empty",
+
+                              context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM,backgroundColor:Colors.red);
+
                         }
+                      else {
                         setState(() {
-                          showSpinner=false;
+                          showSpinner = true;
                         });
+                        try {
+                          final newuser = await _auth.signInWithEmailAndPassword
+                            (email: email, password: password);
+                          if (newuser != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => wlcm()),
+                            );
+                          }
+                          setState(() {
+                            showSpinner = false;
+                          });
+                        }
+                        catch (e) {
+                          print(e);
+                          setState(() {
+                            showSpinner = false;
+                          });
+                        }
                       }
-                      catch(e)
-                      {
-                        print(e);
-                        setState(() {
-                          showSpinner=false;
-                        });
-                      }
-
-
 
 
 
@@ -200,10 +213,7 @@ class _rgstrState extends State<rgstr> {
                     },
                   ),
                 )),
-            SizedBox(height: 20,),
-            Center(
-              child: Text("FORGOT PASSWORD ?", style: TextStyle(color:Colors.red,fontSize: 12 ,fontWeight: FontWeight.w700),),
-            ),
+
             SizedBox(height: 40,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -221,7 +231,7 @@ class _rgstrState extends State<rgstr> {
 
                 },
 
-                    child: Text("Sign Up ", style: TextStyle(color:Colors.red, fontWeight: FontWeight.w500,fontSize: 12, decoration: TextDecoration.underline ))),
+                    child: Text("Sign Up ", style: TextStyle(color:Colors.blueAccent, fontWeight: FontWeight.w500,fontSize: 12, decoration: TextDecoration.underline ))),
 
               ],
             )
@@ -229,7 +239,9 @@ class _rgstrState extends State<rgstr> {
         ),
       ),
     );
+
   }
+
 }
 
 

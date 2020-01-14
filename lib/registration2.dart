@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'welcome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:toast/toast.dart';
+
 
 
 class signup extends StatefulWidget {
@@ -21,7 +23,7 @@ class _signupState extends State<signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffDEDABB),
+      backgroundColor: Color(0xffffffff),
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: SingleChildScrollView(
@@ -33,7 +35,7 @@ class _signupState extends State<signup> {
               SizedBox(height: 45,),
               Image.asset('assets/images/logos.jpg'),
 Text("SIGN UP HERE",style: TextStyle(fontSize: 42,fontWeight:FontWeight.bold,
-fontFamily: 'DancingScript',color: Colors.redAccent
+fontFamily: 'DancingScript',color: Colors.blueAccent
 ),),
               SizedBox(height: 50),
 
@@ -41,14 +43,14 @@ fontFamily: 'DancingScript',color: Colors.redAccent
 
                 padding: EdgeInsets.symmetric(horizontal: 32 ),
                 child: Material(
-                  elevation: 4.0,
+                  elevation: 5.0,
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   child: TextField(
                     onChanged: (String value){
-                      email=value;
+                      email=value.trim();
 
                     },
-                    cursorColor: Colors.deepOrange,
+                    cursorColor: Colors.blue,
                     decoration: InputDecoration(
                         hintText: "Email",
                         prefixIcon: Material(
@@ -71,15 +73,15 @@ fontFamily: 'DancingScript',color: Colors.redAccent
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32),
                 child: Material(
-                  elevation: 4.0,
+                  elevation: 5.0,
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   child: TextField(
                     obscureText: true,
                     onChanged: (String value){
-                      password=value;
+                      password=value.trim();
 
                     },
-                    cursorColor: Colors.deepOrange,
+                    cursorColor: Colors.blue,
                     decoration: InputDecoration(
                         hintText: "Password",
                         prefixIcon: Material(
@@ -102,15 +104,15 @@ fontFamily: 'DancingScript',color: Colors.redAccent
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32),
                 child: Material(
-                  elevation: 4.0,
+                  elevation: 5.0,
                   borderRadius: BorderRadius.all(Radius.circular(30)),
                   child: TextField(
                     obscureText: true,
                     onChanged: (String value){
-                      password2=value;
+                      password2=value.trim();
 
                     },
-                    cursorColor: Colors.deepOrange,
+                    cursorColor: Colors.blue,
                     decoration: InputDecoration(
                         hintText: "Confirm Password",
                         prefixIcon: Material(
@@ -135,7 +137,7 @@ fontFamily: 'DancingScript',color: Colors.redAccent
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(100)),
-                        color: Color(0xffff3a5a)),
+                        color: Color(0xff1E90FF)),
                     child: FlatButton(
 
                       child: Text(
@@ -180,6 +182,12 @@ fontFamily: 'DancingScript',color: Colors.redAccent
                         else{
 
                           //dialouge shows that pass dont match
+                          Toast.show(
+                          "Password donot match",
+
+                          context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM,backgroundColor:Colors.red);
+
+
 
                         }
 

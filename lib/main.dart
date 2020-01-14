@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'MMCV Health',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
       ),
       home: splash(),
     );
@@ -33,10 +33,23 @@ class splash extends StatefulWidget {
 }
 
 class _splashState extends State<splash> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    new Future.delayed(
+        const Duration(seconds: 2),
+            () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => rgstr()),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffDEDABB),
+        backgroundColor: Color(0xffffffff),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -60,9 +73,9 @@ class _splashState extends State<splash> {
                       MaterialPageRoute(builder: (context) => rgstr()));
                 },
                 child: Text(
-                  'Tap to start',
+                  'MMCV Health',
                   style: TextStyle(
-                      color: Colors.black87,
+                      color: Colors.blue,
                       fontSize: 40,
                       fontFamily: 'DancingScript'),
                 ),
