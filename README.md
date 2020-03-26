@@ -1,6 +1,18 @@
 # health_app
+A health app with api integration also includes firebase authentication.
 
-A new Flutter application.
+## Screen Shots
+
+<p float="left" align="middle">
+<img src="https://user-images.githubusercontent.com/38713396/77704604-42f58c00-6fdf-11ea-933b-989579d0a655.png" width="400" height="600">&nbsp&nbsp&nbsp&nbsp&nbsp
+<img src="https://user-images.githubusercontent.com/38713396/77704614-47ba4000-6fdf-11ea-9c0f-ffe65b4ae4f2.png" width="400" height="600">
+<img src="https://user-images.githubusercontent.com/38713396/77704624-4be65d80-6fdf-11ea-8f38-92764eead819.png" width="400" height="600">
+&nbsp&nbsp&nbsp&nbsp&nbsp
+
+<img src="https://user-images.githubusercontent.com/38713396/77704634-543e9880-6fdf-11ea-9bab-5837f6c1c488.png" width="400" height="600">
+</p>
+
+
 
 ## Getting Started
 
